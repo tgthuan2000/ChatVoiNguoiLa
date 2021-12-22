@@ -27,4 +27,6 @@ public class Key {
     public static final String CLEAR_OLDCHAT = "CLEAR_OLDCHAT";
     public static final String REFRESH_FOR_OUTCHAT = "REFRESH_FOR_OUTCHAT";
 
+    public static final String MESSAGE = "MESSAGE";
+
 }

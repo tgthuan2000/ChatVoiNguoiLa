@@ -1,5 +1,6 @@
 package Client;
 
+import Client.GUI.Chat;
 import Client.GUI.Form;
 import Client.GUI.Main;
 import Shares.Key;
@@ -81,6 +82,9 @@ public class WorkerClient implements Runnable {
                             break;
                         case Key.USER_OUTCHAT:
                             userOutChat();
+                            break;
+                        case Key.MESSAGE:
+                            message();
                             break;
                     }
                 } catch (IOException ex) {
@@ -173,5 +177,9 @@ public class WorkerClient implements Runnable {
         JOptionPane.showMessageDialog(null, "Đối phương đã thoát phòng chat!");
         Form.hideChat();
         Form.newMain();
+    }
+
+    private void message() throws IOException {
+        Chat.textArea.append(BUS.user2 + ": " + readLine() + "\n");
     }
 }

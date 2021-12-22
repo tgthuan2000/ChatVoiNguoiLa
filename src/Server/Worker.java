@@ -63,6 +63,9 @@ public class Worker implements Runnable {
                         case Key.CLEAR_OLDCHAT:
                             clearOldChat();
                             break;
+                        case Key.MESSAGE:
+                            message();
+                            break;
                     }
                 } catch (IOException ex) {
                     break;
@@ -389,6 +392,12 @@ public class Worker implements Runnable {
         user2 = null;
         roomId = null;
         ServerMain.chatWorkers.remove(this);
+    }
+
+    private void message() throws IOException {
+        workerUser2.writeLine(Key.MESSAGE);
+        workerUser2.writeLine(readLine());
+        workerUser2.out.flush();
     }
 
 }
