@@ -304,7 +304,7 @@ public class Worker implements Runnable {
                             if (worker.user.equals(r.getUser2())) {
                                 System.out.println("Huỷ room: " + r.getRoomID());
                                 ServerMain.waittingRooms.remove(r);
-                                sendCancleGame(worker);
+                                sendCancleChat(worker);
                                 ghepcap();
                                 break;
                             }
@@ -320,7 +320,7 @@ public class Worker implements Runnable {
                             if (worker.user.equals(r.getUser1())) {
                                 System.out.println("Huỷ room: " + r.getRoomID());
                                 ServerMain.waittingRooms.remove(r);
-                                sendCancleGame(worker);
+                                sendCancleChat(worker);
                                 ghepcap();
                                 break;
                             }
@@ -342,7 +342,7 @@ public class Worker implements Runnable {
         }
     }
 
-    private void sendCancleGame(Worker worker) throws IOException {
+    private void sendCancleChat(Worker worker) throws IOException {
         ServerMain.users_waitting.add(worker.user);
         System.out.println("Add user " + worker.user + " vào hàng chờ");
         worker.writeLine(Key.NO_CONTINUE_CHAT);

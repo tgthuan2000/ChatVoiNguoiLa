@@ -180,10 +180,6 @@ public class Chat extends javax.swing.JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        new Chat().setVisible(true);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnSend;
     private javax.swing.JPanel jPanel1;
