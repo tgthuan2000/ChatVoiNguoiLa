@@ -11,6 +11,7 @@ public class Key {
     public static final String PLAY_CHAT = "PLAY_CHAT";
     public static final String CANCLE_CHAT = "CANCLE_CHAT";
     public static final String NO_CONTINUE_CHAT = "NO_CONTINUE_CHAT";
+    public static final String GHEP_CAP = "GHEP_CAP";
 
     public static final String HAVE_CHAT = "ACCEPT_CHAT";
     public static final String CHECK_ACCEPT_CHAT = "CHECK_ACCEPT_CHAT";

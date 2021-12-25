@@ -54,6 +54,9 @@ public class Worker implements Runnable {
                         case Key.CHECK_ACCEPT_CHAT:
                             checkAcceptChat();
                             break;
+                        case Key.GHEP_CAP:
+                            ghepcap();
+                            break;
                         case Key.LOAD_CHAT:
                             prepare();
                             break;
@@ -260,7 +263,7 @@ public class Worker implements Runnable {
                     System.out.println("2 user accept");
                     if (currentUser == 1) {
                         for (Worker worker : ServerMain.workers) {
-                            if (worker.user != null && worker.user.equals(r.getUser2())) {
+                            if (worker.user.equals(r.getUser2())) {
                                 loadChat(worker);
                                 break;
                             }
@@ -305,7 +308,6 @@ public class Worker implements Runnable {
                                 System.out.println("Huỷ room: " + r.getRoomID());
                                 ServerMain.waittingRooms.remove(r);
                                 sendCancleChat(worker);
-                                ghepcap();
                                 break;
                             }
                         }
@@ -321,7 +323,6 @@ public class Worker implements Runnable {
                                 System.out.println("Huỷ room: " + r.getRoomID());
                                 ServerMain.waittingRooms.remove(r);
                                 sendCancleChat(worker);
-                                ghepcap();
                                 break;
                             }
                         }
@@ -346,6 +347,8 @@ public class Worker implements Runnable {
         ServerMain.users_waitting.add(worker.user);
         System.out.println("Add user " + worker.user + " vào hàng chờ");
         worker.writeLine(Key.NO_CONTINUE_CHAT);
+        worker.out.flush();
+        worker.writeLine(Key.GHEP_CAP);
         worker.out.flush();
         worker.roomId = null;
     }
@@ -381,6 +384,12 @@ public class Worker implements Runnable {
         out.flush();
     }
 
+    private void message() throws IOException {
+        workerUser2.writeLine(Key.MESSAGE);
+        workerUser2.writeLine(readLine());
+        workerUser2.out.flush();
+    }
+
     private void refresh() throws IOException {
         workerUser2.writeLine(Key.USER_OUTCHAT);
         workerUser2.out.flush();
@@ -393,11 +402,4 @@ public class Worker implements Runnable {
         roomId = null;
         ServerMain.chatWorkers.remove(this);
     }
-
-    private void message() throws IOException {
-        workerUser2.writeLine(Key.MESSAGE);
-        workerUser2.writeLine(readLine());
-        workerUser2.out.flush();
-    }
-
 }

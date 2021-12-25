@@ -64,6 +64,9 @@ public class WorkerClient implements Runnable {
                         case Key.NO_CONTINUE_CHAT:
                             noContinueChat();
                             break;
+                        case Key.GHEP_CAP:
+                            ghepCap();
+                            break;
 
                         //
                         // IN CHAT
@@ -152,6 +155,11 @@ public class WorkerClient implements Runnable {
         JOptionPane.showMessageDialog(null, "Phòng chat bị huỷ do đối phương không chấp nhận!!!");
     }
 
+    private void ghepCap() throws IOException {
+        writeLine(Key.GHEP_CAP);
+        out.flush();
+    }
+
     private void loadChat() throws IOException {
         writeLine(Key.LOAD_CHAT);
         out.flush();
@@ -171,6 +179,10 @@ public class WorkerClient implements Runnable {
         Form.newMain();
     }
 
+    private void message() throws IOException {
+        Chat.textArea.append(BUS.user2 + ": " + readLine() + "\n");
+    }
+
     private void userOutChat() throws IOException {
         writeLine(Key.CLEAR_OLDCHAT);
         out.flush();
@@ -179,7 +191,4 @@ public class WorkerClient implements Runnable {
         Form.newMain();
     }
 
-    private void message() throws IOException {
-        Chat.textArea.append(BUS.user2 + ": " + readLine() + "\n");
-    }
 }
