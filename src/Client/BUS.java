@@ -1,7 +1,5 @@
 package Client;
 
-import Client.Status;
-import Client.WorkerClient;
 import Shares.Key;
 import Shares.ServerConfig;
 import java.io.BufferedReader;
@@ -10,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +18,6 @@ public class BUS {
     public static BufferedReader in;
     public static String user = null;
     public static String user2 = null;
-    public static ArrayList<String> users; // chứa thông tin user trong chat room
 
     public static void connect() throws IOException {
         if (socket == null) {
@@ -30,7 +26,6 @@ public class BUS {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             Executors.newSingleThreadExecutor().execute(new WorkerClient(socket));
             System.out.println("Client connected");
-            users = new ArrayList<>();
         }
     }
 
